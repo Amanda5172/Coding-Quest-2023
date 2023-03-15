@@ -54,7 +54,7 @@ def movesnake(snakelength,row,column):
     global grid
     global s
     if grid[row][column]=='F':
-        grid[row][column]='S' #how to remove the end of the snake ->make it move
+        grid[row][column]='S' 
         snakepos.append([row,column])
         s=fruit(s)
         #displaygrid()
