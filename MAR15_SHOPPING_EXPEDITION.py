@@ -24,3 +24,37 @@ placesbeen=[1]
 dist=0
 distlist=[]
 n=0
+
+
+def Possible(place):
+    global placesbeen
+    global start
+    global dist
+    
+    if place not in placesbeen:
+        placesbeen.append(place)
+        dist=dist+int(distance(start,place))
+        start=place
+        return True
+    
+
+def Path():
+    global dist
+    
+    for i in range(12):
+        if Possible(i+1):
+            Path()
+            print(placesbeen)#need to go to every point, need to end at 1
+            if len(placesbeen)>1:
+                placesbeen.remove(placesbeen[i-1])
+                #dist=dist-int(distance(placesbeen[i-1],placesbeen[i]))
+    return
+    print(placesbeen)
+        
+    
+    #print(placesbeen)
+    #print(distlist)
+    #distlist.append(dist-600)
+
+Path()
+    
