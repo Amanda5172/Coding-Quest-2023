@@ -1,8 +1,4 @@
-#get permutation
-#get distance
-
-#function to sort data?
-import math
+import itertools
 
 l=[]
 with open("input.txt") as ef:
@@ -10,51 +6,41 @@ with open("input.txt") as ef:
     for k in range(len(r)):
         l.append(r[k].split())
 
-print(l)
-
+val = []
+for i in range(12):
+    val.append(i+1)
 
 
 def distance(p1,p2):
-    d=l[p1-1][p2-1]
+    if p1<p2:
+        d=l[p1-1][p2-1]
+    if p2<p1:
+        d=l[p2-1][p1-1]
     return d
 
+orders = itertools.permutations(val)
+#end=(1,)
+small = 20000
 
-start=1
-placesbeen=[1]
-dist=0
 distlist=[]
-n=0
 
+for i in orders:
+    if i[0]==1:
+        #tup=i+end
+        #print(i)
+        dist=0
+        for j in range(len(i)-1):
+            d=distance(i[j],i[j+1])
+            dist=dist+int(d)
+        #print(dist)
+        #print(i[j+1])
+        d=distance(1,i[j+1])
+        dist=dist+int(d)
+        #print(dist)
+        if dist<small:
+            small=dist
+            print(small)
 
-def Possible(place):
-    global placesbeen
-    global start
-    global dist
-    
-    if place not in placesbeen:
-        placesbeen.append(place)
-        dist=dist+int(distance(start,place))
-        start=place
-        return True
-    
+#print(distlist)
 
-def Path():
-    global dist
-    
-    for i in range(12):
-        if Possible(i+1):
-            Path()
-            print(placesbeen)#need to go to every point, need to end at 1
-            if len(placesbeen)>1:
-                placesbeen.remove(placesbeen[i-1])
-                #dist=dist-int(distance(placesbeen[i-1],placesbeen[i]))
-    return
-    print(placesbeen)
-        
-    
-    #print(placesbeen)
-    #print(distlist)
-    #distlist.append(dist-600)
-
-Path()
-    
+print(small)
